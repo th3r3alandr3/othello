@@ -10,10 +10,10 @@
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.4.1",
     "@types/three": "^0.149.0",
-    "flowbite": "^1.6.3",
     "nuxt": "^3.2.3"
   },
   "dependencies": {
+    "flowbite": "^1.6.3",
     "gsap": "^3.11.4",
     "three": "^0.150.1"
   }
