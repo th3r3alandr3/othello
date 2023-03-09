@@ -155,12 +155,11 @@ export default class OthelloAi {
         const isFull = this.isBoardFull();
         const canPlayerMove = this.canPlayerMove(this.player);
         const canOtherPlayerMove = this.canPlayerMove(this.player === 1 ? 0 : 1);
-        const isGameOver = (
+        return (
             isFull ||
             !canPlayerMove ||
             !canOtherPlayerMove
         );
-        return isGameOver;
     }
 
     private isBoardFull(): boolean {

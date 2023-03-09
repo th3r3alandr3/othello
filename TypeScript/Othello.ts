@@ -82,7 +82,7 @@ export default class Othello {
     }
 
     public restart() {
-        console.log('restart');
+        window.location.reload();
     }
 
     get sates() {
@@ -210,8 +210,7 @@ export default class Othello {
                         if (captured.length > 0) {
                             flipped = true;
                             captured.forEach((pos) => {
-                                this.setStone(pos.x, pos.y, this.currentPlayer, true);
-                                // this.board[pos.x][pos.y] = this.currentColor;
+                                this.setStone(pos.x, pos.y, this.currentPlayer);
                             });
                         }
                         break;
@@ -226,8 +225,6 @@ export default class Othello {
 
         if (flipped) {
             this.setStone(x, y, this.currentPlayer);
-            // this.board[this.mouse.x][this.mouse.y] = this.currentColor;
-            console.log(this.board);
             return true;
         } else {
             return false;
@@ -381,10 +378,6 @@ export default class Othello {
 
 
     private placeToken(x: number, y: number, player: number): THREE.Group {
-        console.log(`Placing token at ${x}, ${y} for player ${player}`)
-        if (y + x === 0) {
-            console.log('break')
-        }
         const position = new THREE.Vector3(x - 3.5, .02, y - 3.5);
         const tokenName = `token_${x}_${y}`;
         let token = this.scene.getObjectByName(tokenName) as Token;
@@ -406,10 +399,7 @@ export default class Othello {
         return copy;
     }
 
-    private setStone(x: number, y: number, currentColor: number, update = false) {
-        if (update) {
-            console.log('setStone', x, y, currentColor);
-        }
+    private setStone(x: number, y: number, currentColor: number) {
         this.board[x][y] = currentColor;
         this.placeToken(x, y, currentColor);
     }
