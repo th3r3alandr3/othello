@@ -1,31 +1,28 @@
 <template>
     <div id="scene"></div>
-    <div v-if="!close && states && states.gameEnded" id="defaultModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full flex justify-center items-center">
-        <div class="relative w-full h-full max-w-2xl md:h-auto">
+    <div v-if="!close && states && states.gameEnded" id="defaultModal" tabindex="-1" aria-hidden="true" class="score-modal">
+        <div class="wrapper">
             <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow">
+            <div class="content">
                 <!-- Modal header -->
-                <div class="flex items-start justify-between p-4 border-b rounded-t">
-                    <h3 class="text-xl font-semibold text-gray-900">
+                <div class="header">
+                    <h3 class="title">
                         {{ states.endGameMessage }}
                     </h3>
-                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="defaultModal">
-                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    </button>
                 </div>
                 <!-- Modal body -->
-                <div class="p-6 space-y-6">
-                    <p class="text-base leading-relaxed text-gray-500">
+                <div class="body">
+                    <p class="text">
                         Schwarz: {{ states.blackScore }}
                     </p>
-                    <p class="text-base leading-relaxed text-gray-500">
+                    <p class="text">
                         Weiß: {{ states.whiteScore }}
                     </p>
                 </div>
                 <!-- Modal footer -->
-                <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b flex justify-end">
-                    <button data-modal-hide="defaultModal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" @click="othello.restart()">Neustarten</button>
-                    <button data-modal-hide="defaultModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10" @click="close = true">Schließen</button>
+                <div class="footer">
+                    <button data-modal-hide="defaultModal" type="button" class="button-restart" @click="othello.restart()">Neustarten</button>
+                    <button data-modal-hide="defaultModal" type="button" class="button-cancel" @click="close = true">Schließen</button>
                 </div>
             </div>
         </div>
@@ -60,3 +57,127 @@ function update() {
 }
 
 </script>
+
+<style>
+.score-modal {
+    display: flex;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 50;
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100% - 1rem);
+
+    @media (min-width: 768px) {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+    }
+
+    .wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 42rem;
+        height: 100%;
+
+        @media (min-width: 768px) {
+            height: auto;
+        }
+
+        .content {
+            position: relative;
+            background-color: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+
+            .header {
+                display: flex;
+                padding: 1rem;
+                justify-content: space-between;
+                align-items: flex-start;
+                border-top-left-radius: 0.25rem;
+                border-top-right-radius: 0.25rem;
+                border-bottom-width: 1px;
+
+                .title {
+                    color: #111827;
+                    font-size: 1.25rem;
+                    line-height: 1.75rem;
+                    font-weight: 600;
+                }
+            }
+
+            .body {
+                padding: 1.5rem;
+                margin-top: 1.5rem;
+
+                .text {
+                    color: #6b7280;
+                    font-size: 1rem;
+                    line-height: 1.5rem;
+                    line-height: 1.625;
+                }
+            }
+
+            .footer {
+                display: flex;
+                padding: 1.5rem;
+                margin-left: 0.5rem;
+                justify-content: flex-end;
+                align-items: center;
+                border-bottom-right-radius: 0.25rem;
+                border-bottom-left-radius: 0.25rem;
+                border-top-width: 1px;
+                border-color: #e5e7eb;
+
+                .button-restart {
+                    padding-top: 0.625rem;
+                    padding-bottom: 0.625rem;
+                    padding-left: 1.25rem;
+                    padding-right: 1.25rem;
+                    background-color: #1d4ed8;
+                    color: #fff;
+                    font-size: 0.875rem;
+                    line-height: 1.25rem;
+                    font-weight: 500;
+                    text-align: center;
+                    border-radius: 0.5rem;
+
+                    :hover {
+                        background-color: #1e40af;
+                    }
+
+                }
+
+                .button-cancel {
+                    padding-top: 0.625rem;
+                    padding-bottom: 0.625rem;
+                    padding-left: 1.25rem;
+                    padding-right: 1.25rem;
+                    background-color: #fff;
+                    color: #6b7280;
+                    font-size: 0.875rem;
+                    line-height: 1.25rem;
+                    font-weight: 500;
+                    border-radius: 0.5rem;
+                    border-width: 1px;
+                    border-color: #e5e7eb;
+
+                    :hover {
+                        background-color: #f3f4f6;
+                        color: #111827;
+                    }
+                }
+            }
+        }
+    }
+}
+</style>
