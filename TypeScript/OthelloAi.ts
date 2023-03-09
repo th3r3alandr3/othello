@@ -1,7 +1,7 @@
 export default class OthelloAi {
     private readonly player: number;
-    private readonly maxDepth: number = 20;
-    private readonly maxTime: number = 2000;
+    private readonly maxDepth: number = 50;
+    private readonly maxTime: number = 5000;
 
     private readonly WEIGHTS: number[][] = [
         [120, -20, 20, 5, 5, 20, -20, 120],
